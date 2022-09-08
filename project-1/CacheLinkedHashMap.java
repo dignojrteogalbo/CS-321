@@ -1,44 +1,48 @@
 import java.text.DecimalFormat;
-import java.util.LinkedList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-public class Cache<T> {
+public class CacheLinkedHashMap<T> {
     private int size;
-    private LinkedList<T> list;
+    private LinkedHashMap<String, T> list;
     private int references = 0;
     private int hits = 0;
+    private static final float loadFactor = 1f; // resize unless completely full
+    private static final boolean accessOrder = false; // for insertion-order
 
-    public Cache(int size) {
+    public CacheLinkedHashMap(int size) {
         this.size = size;
-        list = new LinkedList<>();
+        list = new LinkedHashMap<>(size + 1, loadFactor, accessOrder) {
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<String, T> eldest) {
+                return list.size() > size;
+            }
+        };
     }
 
     public T getObject(T object) {
         references++;
-        if (list.contains(object)) {
+        String key = object.toString();
+
+        if (list.containsKey(key)) {
             hits++;
-            list.remove(object);
-        } else if (list.size() >= size) {
-            list.removeLast();
+            list.remove(key);
         }
 
-        list.addFirst(object);
-        return list.getFirst();
+        list.put(key, object);
+        return list.get(key);
     }
 
     public void addObject(T object) {
-        if (list.size() >= size) {
-            list.removeLast();
-        }
-
-        list.addFirst(object);
+        list.put(object.toString(), object);
     }
 
     public void removeObject(T object) {
-        list.remove(object);
+        list.remove(object.toString());
     }
 
     public void clearCache() {
-        list = new LinkedList<>();
+        list.clear();
     }
 
     public String toString() {
@@ -46,7 +50,7 @@ public class Cache<T> {
         DecimalFormat decimalFormat = new DecimalFormat("############.############");
 
         output.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        output.append(String.format("LinkedList Cache with %d entries has been created\n", this.size()));
+        output.append(String.format("LinkedHashMap Cache with %d entries has been created\n", this.size()));
         output.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         output.append(String.format("Total number of references:\t%d\n", this.getReferences()));
         output.append(String.format("Total number of cache hits:\t%d\n", this.getHits()));
@@ -60,11 +64,11 @@ public class Cache<T> {
         return size;
     }
 
-    private int getReferences() {
+    public int getReferences() {
         return references;
     }
 
-    private int getHits() {
+    public int getHits() {
         return hits;
     }
 }

@@ -5,13 +5,18 @@ then
 	echo
 	echo "Input data files found. Proceeding with the test!"
 	echo
+elif test -e PlayerGenerator.java -a -e Player.java 
+then
+	javac PlayerGenerator.java Player.java
+	echo "Generating data files..."
+	echo
+	java PlayerGenerator 50 3.0 0 123
+	java PlayerGenerator 1000 15.0 0 123
+	java PlayerGenerator 100000 2500.0 0 123 
+	echo
+	echo "Finished generating data files!"
 else
-	echo
-	echo "Expected input data files: Player-List50.data, Player-List1000.data, and Player-List100000.data not found!"
-	echo "Please generate all the data files as explained in the project specifications."
-	echo "!!!BAILING out!!!"
-	echo
-	exit 1
+	echo "PlayerGenerator.java and Player.java files not found!"
 fi
 
 
