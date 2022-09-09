@@ -1,0 +1,50 @@
+[dignojrteogalbo@onyx project-1]$ submit amit CS321 p1
+
+***************************************************** 
+Right now this program is collecting the following directory
+
+    /home/DIGNOJRTEOGALBO/cs321/project-1 
+
+Make sure that the directory is the right one!!!!
+
+If you are trying to submit the previous program (late),
+ this program will time-stamp your submission.  
+
+press Enter to continue.
+
+
+Here are the files that will be submitted. If that is not correct,
+then you can resubmit with the right files in place.
+
+Directory: /home/DIGNOJRTEOGALBO/cs321/project-1
+
+Files:
+./
+./run-tests.sh
+./Player.java
+./Cache.java
+./test-cases/
+./test-cases/in1
+./test-cases/in6
+./test-cases/out4
+./test-cases/in2
+./test-cases/in5
+./test-cases/out3
+./test-cases/out1
+./test-cases/out6
+./test-cases/out2
+./test-cases/in4
+./test-cases/in3
+./test-cases/out5
+./PlayerGenerator.java
+./README.md
+./CacheTest.java
+./CacheLinkedHashMap.java
+
+Submission of Programming Assignment p1 is now COMPLETE.
+You will be informed of your grade 
+after the deadline (via e-mail). 
+
+Current timestamp: Fri Sep  9 15:42:31 2022
+
+*****************************************************

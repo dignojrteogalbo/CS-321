@@ -1,0 +1,22 @@
+[dignojrteogalbo@onyx project-1]$ submit -check amit CS321 p1
+drwxrwx--- dignojrteogalbo/530250 0 2022-09-09 15:41 ./
+-rwxrwx--- dignojrteogalbo/530250 1317 2022-09-09 15:39 ./run-tests.sh
+-rwxrwx--- dignojrteogalbo/530250  918 2022-09-09 15:39 ./Player.java
+-rwxrwx--- dignojrteogalbo/530250 3513 2022-09-09 15:39 ./Cache.java
+drwxrwx--- dignojrteogalbo/530250    0 2022-08-31 21:34 ./test-cases/
+-rwxrwx--- dignojrteogalbo/530250   36 2022-09-09 15:39 ./test-cases/in1
+-rw-rw---- dignojrteogalbo/530250   44 2022-09-09 15:39 ./test-cases/in6
+-rw-rw---- dignojrteogalbo/530250  439 2022-09-09 15:39 ./test-cases/out4
+-rw-rw---- dignojrteogalbo/530250   37 2022-09-09 15:39 ./test-cases/in2
+-rw-rw---- dignojrteogalbo/530250   43 2022-09-09 15:39 ./test-cases/in5
+-rw-rw---- dignojrteogalbo/530250  438 2022-09-09 15:39 ./test-cases/out3
+-rw-rw---- dignojrteogalbo/530250  433 2022-09-09 15:39 ./test-cases/out1
+-rw-rw---- dignojrteogalbo/530250  449 2022-09-09 15:39 ./test-cases/out6
+-rw-rw---- dignojrteogalbo/530250  434 2022-09-09 15:39 ./test-cases/out2
+-rw-rw---- dignojrteogalbo/530250   39 2022-09-09 15:39 ./test-cases/in4
+-rw-rw---- dignojrteogalbo/530250   39 2022-09-09 15:39 ./test-cases/in3
+-rw-rw---- dignojrteogalbo/530250  448 2022-09-09 15:39 ./test-cases/out5
+-rwxrwx--- dignojrteogalbo/530250 5448 2022-09-09 15:39 ./PlayerGenerator.java
+-rwxrwx--- dignojrteogalbo/530250 3774 2022-09-09 15:39 ./README.md
+-rwxrwx--- dignojrteogalbo/530250 4797 2022-09-09 15:39 ./CacheTest.java
+-rwxrwx--- dignojrteogalbo/530250 3912 2022-09-09 15:39 ./CacheLinkedHashMap.java

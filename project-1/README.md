@@ -32,15 +32,51 @@ input sizes (and cache sizes), the LinkedHashMap was wayyyyyy faster!
 
 ## Compiling and Using
 
-This section should tell the user how to compile your code.  It is
-also appropriate to instruct the user how to use your code. Does your
-program require user input? If so, what does your user need to know
-about it to use it as quickly as possible?
+Clone this project and change into the directory of the project.
+From the directory containing all the source files, you can execute the
+run-tests.sh script. This script will compile all class files and 
+generate the data files, as well as run tests.
+
+```
+$ ./run-tests.sh
+```
+
+Otherwise you can manually compile all the class files through
+```
+$ javac *.java
+```
+
+Run the compiled CacheTest program using
+```
+$ java CacheTest
+```
+
+The console will output the usage for CacheTest:
+```
+Usage: java CacheTest <cache-size> <serialized-data-filename>
+=============================================================
+<cache-size>    The size of the cache.
+<serialized-data-filename>      The name of the data file containing serialized Player objects that are being cached
+```
 
 ## Results 
 
-This section presents timing and other results of the experiments that 
-you were asked to perform as part of the project.
+When executing the run-tests.sh script, the time elapsed matches 
+closely with the expected time elapsed. This is expected as the data
+values being generated and tested are the same for both my program
+execution and the provided expected outputs. For the LinkedList Cache,
+as the number of entries increases (size of the cache) the speed of 
+the program decreases, despite the same number of players being
+referenced. This is true for the LinkedHashMap Cache as well, but the
+speed of the program does not decrease as quickly as the LinkedList 
+Cache.
+
+I believe that this is the result of the LinkedHashMap being quicker
+to access data, whereas the LinkedList has an O(n) runtime for 
+accessing, the LinkedHashMap has an O(1) runtime for accessing. So
+while the LinkedList is generally quicker on smaller sized inputs and
+smaller sized caches, the LinkedHashMap has a quicker runtime when
+the cache and input sizes are larger.
 
 ## Sources used
 
@@ -52,8 +88,5 @@ you were asked to perform as part of the project.
 * <https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html>
 * <https://docs.oracle.com/javase/7/docs/api/java/text/DecimalFormat.html>
 * <https://github.com/BoiseState/CS321-resources/tree/master/examples/serialization>
-
-August 29, edited run-tests.sh, PlayerGenerate commands, added 0 for debug level... figured it out in lecture
-all tests pass because seed was set correctly
-
-August 31, changed how to handle arguments, decided to not do it
+* <https://linuxhint.com/bash-test-command/>
+    * for editing the run-tests script
