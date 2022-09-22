@@ -43,12 +43,16 @@ public class Task implements TaskInterface, Comparable<Task> {
         this.priority = priority;
     }
 
+    public int getHourCreated() {
+        return hourCreated;
+    }
+
     @Override
     public int compareTo(Task object) {
         if (priority != object.getPriority()) {
             return Integer.compare(priority, object.getPriority());
         } else {
-            return Integer.compare(waitingTime, object.getWaitingTime());
+            return Integer.compare(hourCreated, object.getHourCreated());
         }
     }
     

@@ -1,20 +1,21 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.NoSuchElementException;
 
-// @SuppressWarnings("unchecked")
+@SuppressWarnings("unchecked")
 public class MaxHeap<T extends Comparable<T>> {
     private static final int DEFAULT_SIZE = 10;
-    private Comparable[] entries;
+    private T[] entries;
     private int n;
 
-    public <T extends Comparable<T>> MaxHeap() {
-        this.entries = new Comparable[DEFAULT_SIZE];
+    public MaxHeap() {
+        this.entries = (T[]) new Comparable[DEFAULT_SIZE];
         this.n = 0;
     }
 
-    public <T extends Comparable<T>> MaxHeap(Collection<? extends T> entries) {
-        this.entries = new Comparable[entries.size()];
+    public MaxHeap(Collection<? extends T> entries) {
+        this.entries = (T[]) new Comparable[entries.size()];
         for (T entry : entries) {
             insert(entry);
         }
@@ -29,6 +30,20 @@ public class MaxHeap<T extends Comparable<T>> {
         test.add(5);
 
         MaxHeap<Integer> heap = new MaxHeap<>(test);
+        MaxHeap<Integer> insertHeap = new MaxHeap<>();
+        insertHeap.insert(1);
+        insertHeap.insert(4);
+        insertHeap.insert(3);
+        insertHeap.insert(2);
+        insertHeap.insert(5);
+        insertHeap.insert(-1);
+        insertHeap.insert(8);
+        insertHeap.insert(-2);
+        while (!insertHeap.isEmpty()) {
+            insertHeap.extractMax();
+        }
+        insertHeap.insert(8);
+        insertHeap.extractMax();
     }
 
     private int parent(int index) {
@@ -65,7 +80,11 @@ public class MaxHeap<T extends Comparable<T>> {
         }
     }
 
-    public T extractMax() throws HeapException {
+    public T extractMax() {
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
+
         T max = max();
         entries[0] = entries[size() - 1];
         n--;
@@ -73,15 +92,15 @@ public class MaxHeap<T extends Comparable<T>> {
         return max;
     }
 
-    private T max() throws HeapException {
-        if (size() < 1) {
-            throw new HeapException("Heap Underflow");
+    public T max() {
+        if (isEmpty()) {
+            throw new NoSuchElementException();
         }
 
-        return (T) entries[0];
+        return entries[0];
     }
 
-    public <T extends Comparable<T>> void insert(T element) {
+    public void insert(T element) {
         if (entries.length <= size()) {
             resize(size() * 2);
         }
@@ -93,16 +112,23 @@ public class MaxHeap<T extends Comparable<T>> {
         }
 
         n++;
-        entries[n-1] = entries[n-2];
-
-        try {
-            increaseKey(n-1, element);
-        } catch (HeapException err) {
-            System.out.println(err.getMessage());
+        entries[n - 1] = element;
+        int i = n - 1;
+        while (i >= 0 && entries[i].compareTo(entries[parent(i)]) > 0) {
+            swap(i, parent(i));
+            i = parent(i);
         }
     }
 
-    public <T extends Comparable<T>> void increaseKey(int index, T value) throws HeapException {
+    public void increaseKey(int index, T value) throws HeapException {
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
+
+        if (index < 0 || index >= size()) {
+            throw new IndexOutOfBoundsException();
+        }
+
         if (entries[index].compareTo(value) > 0) {
             throw new HeapException("New value must be larger than current value");
         }
@@ -129,13 +155,21 @@ public class MaxHeap<T extends Comparable<T>> {
         return n;
     }
 
+    public T get(int index) {
+        if (index < 0 || index >= size()) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        return entries[index];
+    }
+
     private void resize(int size) {
-        Comparable[] resized = Arrays.copyOf(entries, size);
+        T[] resized = Arrays.copyOf(entries, size);
         entries = resized;
     }
 
-    private void swap(int a, int b) { 
-        Comparable temp = entries[a];
+    private void swap(int a, int b) {
+        T temp = entries[a];
         entries[a] = entries[b];
         entries[b] = temp;
     }
