@@ -5,7 +5,7 @@ public class Task implements TaskInterface, Comparable<Task> {
     private int hourCreated;
     private String description;
 
-    public Task(int priority, Task.TaskType taskType, int waitingTime, int hourCreated, String description) {
+    public Task(int priority, TaskInterface.TaskType taskType, int waitingTime, int hourCreated, String description) {
         this.taskType = taskType;
         this.priority = priority;
         this.waitingTime = waitingTime;
@@ -45,6 +45,10 @@ public class Task implements TaskInterface, Comparable<Task> {
 
     public int getHourCreated() {
         return hourCreated;
+    }
+
+    public String getTaskDescription() {
+        return description;
     }
 
     @Override
