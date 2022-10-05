@@ -16,17 +16,13 @@ public class MaxHeap<T extends Comparable<T>> {
 
     public MaxHeap(Collection<? extends T> entries) {
         this.entries = (T[]) new Comparable[entries.size()];
-        Object[] arr = entries.toArray();
-        for (int i = 0; i < entries.size(); i++) {
-            this.entries[i] = (T) arr[i];
+        for (T entry : entries) {
+            insert(entry);
         }
-        n = entries.size();
-        // for (T entry : entries) {
-        //     insert(entry);
-        // }
     }
 
     public static void main(String[] args) {
+        // int a = (8 >> 1) - 1;
         ArrayList<Integer> test = new ArrayList<>();
         test.add(2);
         test.add(1);
@@ -43,15 +39,15 @@ public class MaxHeap<T extends Comparable<T>> {
     }
 
     private int parent(int index) {
-        return index >> 1;
+        return (index - 1) / 2;
     }
 
     private int left(int index) {
-        return index << 1;
+        return (index * 2) + 1;
     }
 
     private int right(int index) {
-        return index << 1 | 1;
+        return (index * 2) + 2;
     }
 
     public void heapify(int index) {

@@ -20,7 +20,7 @@ public class TaskGenerator implements TaskGeneratorInterface {
     }
 
     @Override
-    public void decrementEnergyStorage(TaskInterface.TaskType taskType) {
+    public void decrementEnergyStorage(Task.TaskType taskType) {
         energyStorage -= taskType.getEnergyPerHour();
     }
 
@@ -35,7 +35,7 @@ public class TaskGenerator implements TaskGeneratorInterface {
     }
 
     @Override
-    public Task getNewTask(int hourCreated, TaskInterface.TaskType taskType, String taskDescription) {
+    public Task getNewTask(int hourCreated, Task.TaskType taskType, String taskDescription) {
         int priority = 0;
         int waitingTime = 0;
 
@@ -68,31 +68,6 @@ public class TaskGenerator implements TaskGeneratorInterface {
      */
     @Override
     public String toString(Task task, Task.TaskType taskType) {
-        if (taskType == Task.TaskType.MINING) {
-            return "     Mining " + task.getTaskDescription() + " at " + getCurrentEnergyStorage()
-                    + " energy points (Priority:" + task.getPriority() + ")";
-        }
-        if (taskType == Task.TaskType.FISHING) {
-            return "     Fishing " + task.getTaskDescription() + " at " + getCurrentEnergyStorage()
-                    + " energy points (Priority:" + task.getPriority() + ")";
-        }
-        if (taskType == Task.TaskType.FARM_MAINTENANCE) {
-            return "     Farm Maintenance " + task.getTaskDescription() + " at " + getCurrentEnergyStorage()
-                    + " energy points (Priority:" + task.getPriority() + ")";
-        }
-        if (taskType == Task.TaskType.FORAGING) {
-            return "     Foraging " + task.getTaskDescription() + " at " + getCurrentEnergyStorage()
-                    + " energy points (Priority:" + task.getPriority() + ")";
-        }
-        if (taskType == Task.TaskType.FEEDING) {
-            return "     Feeding " + task.getTaskDescription() + " at " + getCurrentEnergyStorage()
-                    + " energy points (Priority:" + task.getPriority() + ")";
-        }
-        if (taskType == Task.TaskType.SOCIALIZING) {
-            return "     Socializing " + task.getTaskDescription() + " at " + getCurrentEnergyStorage()
-                    + " energy points (Priority:" + task.getPriority() + ")";
-        } else {
-            return "nothing to see here...";
-        }
+        return String.format("Energy: %s", energyStorage);
     }
 }

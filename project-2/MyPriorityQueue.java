@@ -20,21 +20,16 @@ public class MyPriorityQueue extends MaxHeap<Task> implements PriorityQueueInter
         for (int index = 0; index < maxHeap.size(); index++) {
             Task current = maxHeap.get(index);
             int priority = current.getPriority();
-            TaskInterface.TaskType taskType = current.getTaskType();
-            int hourCreated = current.getHourCreated();
-            String description = current.getTaskDescription();
 
-            if (current.getWaitingTime() >= timeToIncrementPriority) {
-                current.resetWaitingTime();
-                if (maxPriority < priority) {
-                    Task value = new Task(priority + 1, taskType, 0, hourCreated, description);
+            if (current.getWaitingTime() >= timeToIncrementPriority && maxPriority < priority) {
+                Task increment = new Task(priority + 1, current.getTaskType(), current.getWaitingTime(), current.getHourCreated(), current.getTaskDescription());
 
-                    try {
-                        maxHeap.increaseKey(index, value);
-                    } catch (HeapException err) {}
+                try {
+                    maxHeap.increaseKey(index, increment);
+                } catch (HeapException err) {
+                    System.out.println("HEAP EXCEPTION");
                 }
             }
         }
     }
-    
 }
