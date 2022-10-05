@@ -3,7 +3,7 @@ import java.util.Random;
 public class TaskGenerator implements TaskGeneratorInterface {
     private double probability;
     private long randomSeed;
-    private int energyStorage;
+    private int currentEnergyStorage;
     private Random random;
 
     private static final int DEFAULT_ENERGY_STORAGE = 200;
@@ -20,8 +20,8 @@ public class TaskGenerator implements TaskGeneratorInterface {
     }
 
     @Override
-    public void decrementEnergyStorage(Task.TaskType taskType) {
-        energyStorage -= taskType.getEnergyPerHour();
+    public void decrementEnergyStorage(TaskInterface.TaskType taskType) {
+        currentEnergyStorage -= taskType.getEnergyPerHour();
     }
 
     @Override
@@ -31,7 +31,7 @@ public class TaskGenerator implements TaskGeneratorInterface {
 
     @Override
     public int getCurrentEnergyStorage() {
-        return energyStorage;
+        return currentEnergyStorage;
     }
 
     @Override
@@ -44,30 +44,57 @@ public class TaskGenerator implements TaskGeneratorInterface {
 
     @Override
     public int getUnlucky(Task task, double unluckyProbability) {
-        boolean isUnlucky = random.nextDouble(1f) < unluckyProbability;
-
-        return 0;
+        if (unluckyProbability <= task.getTaskType().getPassingOutProbability()) {
+            if (unluckyProbability <= task.getTaskType().getDyingProbabilityProbability()) {
+                currentEnergyStorage *= 3 / 4;
+                task.setPriority(0);
+                return 2;
+            } else {
+                currentEnergyStorage /= 2;
+                return 1;
+            }
+        } else {
+            return 0;
+        }
     }
 
     @Override
     public void resetCurrentEnergyStorage() {
-        energyStorage = DEFAULT_ENERGY_STORAGE;
+        currentEnergyStorage = DEFAULT_ENERGY_STORAGE;
         
     }
 
     @Override
     public void setCurrentEnergyStorage(int newEnergyNum) {
-        energyStorage = newEnergyNum;
+        currentEnergyStorage = newEnergyNum;
     }
 
     /**
      * Create a String containing the Task's information.
      *
-     * @param task     - the Task
+     * @param task - the Task
      * @param taskType - the Task's type
      */
     @Override
     public String toString(Task task, Task.TaskType taskType) {
-        return String.format("Energy: %s", energyStorage);
+            if(taskType == Task.TaskType.MINING) {
+                return "     Mining " + task.getTaskDescription() + " at " + currentEnergyStorage + " energy points (Priority:" + task.getPriority() +")";
+            }
+            if(taskType == Task.TaskType.FISHING) {
+                return "     Fishing " + task.getTaskDescription() + " at " + currentEnergyStorage + " energy points (Priority:" + task.getPriority() +")" ;
+            }
+            if(taskType == Task.TaskType.FARM_MAINTENANCE) {
+                return "     Farm Maintenance " + task.getTaskDescription() + " at " + currentEnergyStorage + " energy points (Priority:" + task.getPriority() +")";
+            }
+            if(taskType == Task.TaskType.FORAGING) {
+                return "     Foraging " + task.getTaskDescription() + " at " + currentEnergyStorage + " energy points (Priority:" + task.getPriority() +")" ;
+            }
+            if(taskType == Task.TaskType.FEEDING) {
+                return "     Feeding " + task.getTaskDescription() + " at " + currentEnergyStorage + " energy points (Priority:" + task.getPriority() +")";
+            }
+            if(taskType == Task.TaskType.SOCIALIZING) {
+                return "     Socializing " + task.getTaskDescription() + " at " + currentEnergyStorage + " energy points (Priority:" + task.getPriority() +")";
+            }
+            else { return "nothing to see here..."; }
     }
 }
