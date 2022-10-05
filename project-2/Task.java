@@ -1,3 +1,12 @@
+/**
+ * A task object that contains a priority, task type, waiting time, hour
+ * created, and description. Tasks can be compared to other tasks based on their
+ * priority first hour created, with earlier created tasks having a greater
+ * value.
+ * 
+ * @author Digno JR Teogalbo
+ * @version CS321 Fall 2022
+ */
 public class Task implements TaskInterface, Comparable<Task> {
     private int priority;
     private Task.TaskType taskType;
@@ -6,16 +15,17 @@ public class Task implements TaskInterface, Comparable<Task> {
     private String description;
 
     /**
+     * Constructor for a task object that takes a priority, task type, waiting time, hour created, and description.
      * 
-     * @param priority
-     * @param taskType
-     * @param waitingTime
-     * @param hourCreated
-     * @param description
+     * @param priority    integer value where higher priority indicates a higher value
+     * @param taskType    enum indicating which of the six task types it is
+     * @param waitingTime time task has been waiting
+     * @param hourCreated hour the task was created
+     * @param description description of the task
      */
     public Task(int priority, Task.TaskType taskType, int waitingTime, int hourCreated, String description) {
-        this.taskType = taskType;
-        this.priority = priority;
+        this.taskType    = taskType;
+        this.priority    = priority;
         this.waitingTime = waitingTime;
         this.hourCreated = hourCreated;
         this.description = description;
@@ -51,10 +61,20 @@ public class Task implements TaskInterface, Comparable<Task> {
         this.priority = priority;
     }
 
+    /**
+     * Returns the hour the task was created.
+     * 
+     * @return int hour the task was created
+     */
     public int getHourCreated() {
         return hourCreated;
     }
 
+    /**
+     * Returns the task description.
+     * 
+     * @return String task description
+     */
     public String getTaskDescription() {
         return description;
     }

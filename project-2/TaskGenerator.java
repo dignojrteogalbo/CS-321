@@ -1,14 +1,33 @@
 import java.util.Random;
 
+/**
+ * Task Generator that keeps track of the current energy storage and creates
+ * tasks from a given probability.
+ * 
+ * @author Digno JR Teogalbo
+ * @version CS321 Fall 2022
+ */
 public class TaskGenerator implements TaskGeneratorInterface {
     private double probability;
     private int currentEnergyStorage = DEFAULT_ENERGY;
     private Random random = new Random();
 
+    /**
+     * The task generator will create tasks based on the given probability.
+     * 
+     * @param probability chance for tasks to be created
+     */
     public TaskGenerator(double probability) {
         this.probability = probability;
     }
 
+    /**
+     * The task generator will generate tasks based on the given probability with
+     * the random seed provided.
+     * 
+     * @param probability chance for tasks to be created
+     * @param randomSeed  seed for the randomizer
+     */
     public TaskGenerator(double probability, long randomSeed) {
         this.probability = probability;
         random.setSeed(randomSeed);
