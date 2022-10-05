@@ -1,23 +1,21 @@
+import java.util.ArrayList;
+
 public class MyPriorityQueue extends MaxHeap<Task> implements PriorityQueueInterface {
-    MaxHeap<Task> maxHeap;
-
-    public MyPriorityQueue() {
-        maxHeap = new MaxHeap<>();
-    }
-
     @Override
     public void enqueue(Object task) {
-        maxHeap.insert((Task) task);
+        insert((Task) task);
     }
 
     @Override
     public Task dequeue() {
-        return maxHeap.extractMax();
+        return extractMax();
     }
 
     @Override
     public void update(int timeToIncrementPriority, int maxPriority) {
-        while (!maxHeap.isEmpty()) {
+        ArrayList<Task> stack = new ArrayList<>();
+
+        while (!isEmpty()) {
             Task current = dequeue();
             current.incrementWaitingTime();
 
@@ -26,9 +24,14 @@ public class MyPriorityQueue extends MaxHeap<Task> implements PriorityQueueInter
 
                 if (current.getPriority() < maxPriority) {
                     current.setPriority(current.getPriority() + 1);
-                    maxHeap.insert(current);
                 }
             }
+
+            stack.add(current);
+        }
+
+        for (Task task : stack) {
+            insert(task);
         }
     }
 }

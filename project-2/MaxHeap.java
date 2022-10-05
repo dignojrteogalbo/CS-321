@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.NoSuchElementException;
@@ -19,23 +18,6 @@ public class MaxHeap<T extends Comparable<T>> {
         for (T entry : entries) {
             insert(entry);
         }
-    }
-
-    public static void main(String[] args) {
-        // int a = (8 >> 1) - 1;
-        ArrayList<Integer> test = new ArrayList<>();
-        test.add(2);
-        test.add(1);
-        test.add(3);
-        test.add(5);
-        test.add(4);
-        test.add(6);
-        test.add(7);
-        test.add(8);
-        test.add(9);
-
-        MaxHeap<Integer> heap = new MaxHeap<>(test);
-        heap.buildMaxHeap();
     }
 
     private int parent(int index) {
