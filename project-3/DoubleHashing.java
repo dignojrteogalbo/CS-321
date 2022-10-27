@@ -1,10 +1,6 @@
 public class DoubleHashing extends Hashtable {
-    public DoubleHashing(double loadFactor) {
-        super(loadFactor);
-    }
-
-    public DoubleHashing(double loadFactor, int initialCapacity) {
-        super(loadFactor, initialCapacity);
+    public DoubleHashing(int initialCapacity) {
+        super(initialCapacity);
     }
 
     @Override

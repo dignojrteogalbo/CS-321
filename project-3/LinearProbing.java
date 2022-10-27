@@ -1,10 +1,6 @@
 public class LinearProbing extends Hashtable {
-    public LinearProbing(double loadFactor) {
-        super(loadFactor);
-    }
-
-    public LinearProbing(double loadFactor, int initialCapacity) {
-        super(loadFactor, initialCapacity);
+    public LinearProbing(int initialCapacity) {
+        super(initialCapacity);
     }
 
     @Override
